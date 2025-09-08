@@ -1,4 +1,4 @@
-from rest_framework import generics,permissions,status
+from rest_framework import generics, permissions, status, filters
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
 from .models import Task
@@ -6,6 +6,8 @@ from .serializers import TaskSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.utils.timezone import now
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -27,6 +29,9 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 class TaskListCreateView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ["status", "priority", "due_date"]   # <-- Filtering
+    ordering_fields = ["due_date", "priority"]              # <-- Sorting
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
