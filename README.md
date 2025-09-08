@@ -1,6 +1,6 @@
 # Task Management API
 
-This is a Django REST Framework-based Task Management API built as a capstone project.
+This is a Django REST Framework-based Task Management API built as a capstone project (ALX).
 
 ## Features
 - User registration & authentication
