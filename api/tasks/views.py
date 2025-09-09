@@ -30,8 +30,8 @@ class TaskListCreateView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ["status", "priority", "due_date"]   # <-- Filtering
-    ordering_fields = ["due_date", "priority"]              # <-- Sorting
+    filterset_fields = ["status", "priority", "due_date"]   
+    ordering_fields = ["due_date", "priority"]              
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
