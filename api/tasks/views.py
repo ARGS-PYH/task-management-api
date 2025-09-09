@@ -9,14 +9,13 @@ from django.utils.timezone import now
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-
 class UserCreateView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny] 
 
 
-class UserListView(generics.ListAPIView):
+class UserListView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Task
+from django.utils import timezone
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,8 +30,21 @@ class TaskSerializer(serializers.ModelSerializer):
             "user",
             "title",
             "description",
+            "start_date",
             "due_date",
             "priority",
             "status",
             "completed_at",
         ]
+
+    def validate(self, data):
+        start_date = data.get("start_date")
+        due_date = data.get("due_date")
+
+        if start_date and start_date < timezone.now().date():
+            raise serializers.ValidationError("Start date cannot be in the past.")
+
+        if start_date and due_date and due_date < start_date:
+            raise serializers.ValidationError("Due date cannot be earlier than start date.")
+
+        return data
