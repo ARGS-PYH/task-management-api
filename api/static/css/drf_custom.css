@@ -1,0 +1,23 @@
+body {
+    background-color: #f0f0f0;  
+    color: #333;               
+    font-family: Arial, sans-serif;
+}
+
+.navbar, .navbar-default {
+    background-color: #444 !important; 
+    color: white !important;
+}
+
+a {
+    color: #666;
+}
+a:hover {
+    color: #000;
+}
+
+.panel, .content {
+    background-color: #e0e0e0 !important;  
+    border-radius: 6px;
+    padding: 10px;
+}
